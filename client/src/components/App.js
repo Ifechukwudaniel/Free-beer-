@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-//import "gestalt/dist/css";
+import "gestalt/dist/gestalt.css";
 
 class App extends Component {
   render() {
