@@ -1,3 +1,78 @@
+"""the beer brand"""
+type Brand {
+  _id: ID!
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  Name: String!
+  Description: String
+  Image(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
+}
+
+type BrandAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type BrandConnection {
+  values: [Brand]
+  groupBy: BrandGroupBy
+  aggregate: BrandAggregator
+}
+
+type BrandConnection_id {
+  key: ID
+  connection: BrandConnection
+}
+
+type BrandConnectionCreatedAt {
+  key: DateTime
+  connection: BrandConnection
+}
+
+type BrandConnectionDescription {
+  key: String
+  connection: BrandConnection
+}
+
+type BrandConnectionId {
+  key: ID
+  connection: BrandConnection
+}
+
+type BrandConnectionName {
+  key: String
+  connection: BrandConnection
+}
+
+type BrandConnectionUpdatedAt {
+  key: DateTime
+  connection: BrandConnection
+}
+
+type BrandGroupBy {
+  _id: [BrandConnection_id]
+  id: [BrandConnectionId]
+  createdAt: [BrandConnectionCreatedAt]
+  updatedAt: [BrandConnectionUpdatedAt]
+  Name: [BrandConnectionName]
+  Description: [BrandConnectionDescription]
+}
+
+input BrandInput {
+  Name: String!
+  Description: String
+  Image: [ID]
+}
+
+input createBrandInput {
+  data: BrandInput
+}
+
+type createBrandPayload {
+  brand: Brand
+}
+
 input createRoleInput {
   data: RoleInput
 }
@@ -19,6 +94,14 @@ The `DateTime` scalar represents a date and time following the ISO 8601 standard
 """
 scalar DateTime
 
+input deleteBrandInput {
+  where: InputID
+}
+
+type deleteBrandPayload {
+  brand: Brand
+}
+
 input deleteRoleInput {
   where: InputID
 }
@@ -33,6 +116,12 @@ input deleteUserInput {
 
 type deleteUserPayload {
   user: UsersPermissionsUser
+}
+
+input editBrandInput {
+  Name: String
+  Description: String
+  Image: [ID]
 }
 
 input editFileInput {
@@ -92,9 +181,13 @@ scalar JSON
 """The `Long` scalar type represents 52-bit integers"""
 scalar Long
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileGroupBy | UploadFileConnection_id | UploadFileConnectionId | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionHash | UploadFileConnectionSha256 | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionProvider | UploadFileConnectionPublic_id | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Brand | createBrandPayload | updateBrandPayload | deleteBrandPayload | BrandConnection | BrandAggregator | BrandGroupBy | BrandConnection_id | BrandConnectionId | BrandConnectionCreatedAt | BrandConnectionUpdatedAt | BrandConnectionName | BrandConnectionDescription | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileGroupBy | UploadFileConnection_id | UploadFileConnectionId | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionHash | UploadFileConnectionSha256 | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionProvider | UploadFileConnectionPublic_id | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole
 
 type Mutation {
+  createBrand(input: createBrandInput): createBrandPayload
+  updateBrand(input: updateBrandInput): updateBrandPayload
+  deleteBrand(input: deleteBrandInput): deleteBrandPayload
+
   """Create a new role"""
   createRole(input: createRoleInput): createRolePayload
 
@@ -116,6 +209,9 @@ type Mutation {
 }
 
 type Query {
+  brand(id: ID!): Brand
+  brands(sort: String, limit: Int, start: Int, where: JSON): [Brand]
+  brandsConnection(sort: String, limit: Int, start: Int, where: JSON): BrandConnection
   files(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
   filesConnection(sort: String, limit: Int, start: Int, where: JSON): UploadFileConnection
   role(id: ID!): UsersPermissionsRole
@@ -137,6 +233,15 @@ input RoleInput {
   type: String
   permissions: [ID]
   users: [ID]
+}
+
+input updateBrandInput {
+  where: InputID
+  data: editBrandInput
+}
+
+type updateBrandPayload {
+  brand: Brand
 }
 
 input updateRoleInput {
