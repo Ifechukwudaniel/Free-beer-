@@ -1,18 +1,18 @@
 {
   "paths": {
-    "/brands": {
+    "/brews": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Find all the brews's records",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve brews document(s)",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Brand"
+                    "$ref": "#/components/schemas/Brews"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Brand"
+          "Brews"
         ],
         "parameters": [
           {
@@ -188,14 +188,14 @@
       },
       "post": {
         "deprecated": false,
-        "description": "Create a new record",
+        "description": "Create a new brews record",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve brews document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Brand"
+                  "$ref": "#/components/schemas/Brews"
                 }
               }
             }
@@ -233,7 +233,7 @@
         },
         "summary": "",
         "tags": [
-          "Brand"
+          "Brews"
         ],
         "requestBody": {
           "description": "",
@@ -241,20 +241,20 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewBrand"
+                "$ref": "#/components/schemas/NewBrews"
               }
             }
           }
         }
       }
     },
-    "/brands/count": {
+    "/brews/count": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Retrieve the numver of brews documents",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve brews document(s)",
             "content": {
               "application/json": {
                 "schema": {
@@ -300,22 +300,22 @@
         },
         "summary": "",
         "tags": [
-          "Brand"
+          "Brews"
         ],
         "parameters": []
       }
     },
-    "/brands/{_id}": {
+    "/brews/{_id}": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Find one brews record",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve brews document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Brand"
+                  "$ref": "#/components/schemas/Brews"
                 }
               }
             }
@@ -353,7 +353,7 @@
         },
         "summary": "",
         "tags": [
-          "Brand"
+          "Brews"
         ],
         "parameters": [
           {
@@ -370,14 +370,14 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Update a record",
+        "description": "Update a single brews record",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve brews document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Brand"
+                  "$ref": "#/components/schemas/Brews"
                 }
               }
             }
@@ -415,7 +415,7 @@
         },
         "summary": "",
         "tags": [
-          "Brand"
+          "Brews"
         ],
         "requestBody": {
           "description": "",
@@ -423,7 +423,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewBrand"
+                "$ref": "#/components/schemas/NewBrews"
               }
             }
           }
@@ -443,10 +443,10 @@
       },
       "delete": {
         "deprecated": false,
-        "description": "Delete a record",
+        "description": "Delete a single brews record",
         "responses": {
           "200": {
-            "description": "deletes a single record based on the ID supplied",
+            "description": "deletes a single brews based on the ID supplied",
             "content": {
               "application/json": {
                 "schema": {
@@ -489,7 +489,7 @@
         },
         "summary": "",
         "tags": [
-          "Brand"
+          "Brews"
         ],
         "parameters": [
           {
@@ -508,7 +508,7 @@
   },
   "components": {
     "schemas": {
-      "Brand": {
+      "Brews": {
         "required": [
           "id"
         ],
@@ -519,8 +519,8 @@
           "Name": {
             "type": "string"
           },
-          "Description": {
-            "type": "string"
+          "Price": {
+            "type": "number"
           },
           "Image": {
             "required": [
@@ -568,29 +568,29 @@
               }
             }
           },
-          "brews": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "Name": {
-                  "type": "string"
-                },
-                "Price": {
-                  "type": "number"
-                },
-                "Image": {
-                  "type": "string"
-                },
-                "Description": {
-                  "type": "string"
-                },
-                "brand": {
+          "Description": {
+            "type": "string"
+          },
+          "brand": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "Name": {
+                "type": "string"
+              },
+              "Description": {
+                "type": "string"
+              },
+              "Image": {
+                "type": "string"
+              },
+              "brews": {
+                "type": "array",
+                "items": {
                   "type": "string"
                 }
               }
@@ -598,19 +598,19 @@
           }
         }
       },
-      "NewBrand": {
+      "NewBrews": {
         "properties": {
           "Name": {
             "type": "string"
           },
+          "Price": {
+            "type": "number"
+          },
           "Description": {
             "type": "string"
           },
-          "brews": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "brand": {
+            "type": "string"
           }
         }
       }
@@ -618,7 +618,7 @@
   },
   "tags": [
     {
-      "name": "Brand"
+      "name": "Brews"
     }
   ]
 }
