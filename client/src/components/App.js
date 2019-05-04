@@ -11,7 +11,8 @@ class App extends Component {
   state ={
     brands :[
 
-    ]
+    ],
+    searchBrand :""
   }
 
   async componentDidMount() {
@@ -39,11 +40,36 @@ class App extends Component {
     }   
   }
 
+  handleSearch=( {value})=>{
+   this.setState({ searchBrand : value})
+  }
+
+  filterSearch= ( { searchBrand, brands}) =>{
+   return brands.filter( brand =>{
+       return  brand.Name.toLowerCase().includes(searchBrand.toLowerCase()) ||
+       brand.Description.toLowerCase().includes(searchBrand.toLowerCase());
+   })
+  } 
+
   render() {
-    const brands  = this.state.brands
+    const { brands , searchBrand} = this.state
     return (
        <Container >
-         <SearchField />
+
+       { /* the seaech field  */}
+         <Box display='flex' justifyContent="center" alignItems='center' margin={4}  >
+           <SearchField 
+            id="searchBrand"
+            accessibilityLabel=" search brand field"
+            placeholder=" Seaech for a brand"
+            onChange= {this.handleSearch}
+           />
+           <Box margin ={5} >
+            <Icon accessibilityLabel="Icon "  icon="filter" color={searchBrand ? "orange" : "gray"}/>
+           </Box>
+         </Box>
+
+
       {  /* The container */}
       <Box  display="flex"  justifyContent="center" marginBottom={2}  >
 
@@ -62,7 +88,7 @@ class App extends Component {
        }}
        wrap  shape="rounded" margin={5} display="flex" justifyContent="around" >
            {
-              brands.map( ( (brand,i) =>(
+              this.filterSearch(this.state).map( ( (brand,i) =>(
                 <Box paddingY={4}  width={200}  key={i}>
                   <Card
                   image = {
