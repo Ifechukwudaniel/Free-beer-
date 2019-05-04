@@ -3,6 +3,7 @@ import './App.css';
 import  Stripi  from "strapi-sdk-javascript/build/main"
 import {Link} from 'react-router-dom'
 import {Container, Box, Heading,Card,Image,Text,SearchField,Icon} from 'gestalt'
+import Loader from "./loader"
 const Api_Url = process.env.API_URL || 'http://localhost:1337/'
 const strapi = new Stripi(Api_Url)
 
@@ -12,7 +13,8 @@ class App extends Component {
     brands :[
 
     ],
-    searchBrand :""
+    searchBrand :"",
+    loading:true
   }
 
   async componentDidMount() {
@@ -32,11 +34,12 @@ class App extends Component {
           }`
         }
       })
-     console.log(data)
-     this.setState({brands : data.brands})
+    // console.log(data)
+     this.setState({brands : data.brands, loading:false})
     
     } catch (error) {
        console.log(" add error occured")
+       this.setState({loading:false})
     }   
   }
 
@@ -52,7 +55,7 @@ class App extends Component {
   } 
 
   render() {
-    const { brands , searchBrand} = this.state
+    const { brands , searchBrand ,loading} = this.state
     return (
        <Container >
 
@@ -118,8 +121,9 @@ class App extends Component {
                   </Card>
               </Box>
                 )))
-           }    
+           }   
          </Box>
+         < Loader show ={loading} /> 
        </Container>
     );
   }
