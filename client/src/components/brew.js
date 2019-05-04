@@ -8,7 +8,7 @@ class Brews extends React.Component {
   state = {
     brews: [],
     brand: "",
-    cartItems
+    cartItems :[]
   };
 
   async componentDidMount() {
