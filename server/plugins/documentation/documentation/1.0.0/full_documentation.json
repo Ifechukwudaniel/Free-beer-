@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "05/04/2019 1:00:54 AM"
+    "x-generation-date": "05/04/2019 1:44:36 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -2607,8 +2607,7 @@
     "schemas": {
       "Brand": {
         "required": [
-          "id",
-          "Name"
+          "id"
         ],
         "properties": {
           "id": {
@@ -2618,71 +2617,63 @@
             "type": "string"
           },
           "Description": {
-            "type": "string",
-            "default": ""
+            "type": "string"
           },
           "Image": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "name",
-                "hash",
-                "mime",
-                "size",
-                "url",
-                "provider"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "hash": {
-                  "type": "string"
-                },
-                "sha256": {
-                  "type": "string"
-                },
-                "ext": {
-                  "type": "string"
-                },
-                "mime": {
-                  "type": "string"
-                },
-                "size": {
-                  "type": "string"
-                },
-                "url": {
-                  "type": "string"
-                },
-                "provider": {
-                  "type": "string"
-                },
-                "public_id": {
-                  "type": "string"
-                },
-                "related": {
-                  "type": "string"
-                }
+            "required": [
+              "id",
+              "name",
+              "hash",
+              "mime",
+              "size",
+              "url",
+              "provider"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "hash": {
+                "type": "string"
+              },
+              "sha256": {
+                "type": "string"
+              },
+              "ext": {
+                "type": "string"
+              },
+              "mime": {
+                "type": "string"
+              },
+              "size": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "public_id": {
+                "type": "string"
+              },
+              "related": {
+                "type": "string"
               }
             }
           }
         }
       },
       "NewBrand": {
-        "required": [
-          "Name"
-        ],
         "properties": {
           "Name": {
             "type": "string"
           },
           "Description": {
-            "type": "string",
-            "default": ""
+            "type": "string"
           }
         }
       },

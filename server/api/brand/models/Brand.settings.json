@@ -3,22 +3,20 @@
   "collectionName": "",
   "info": {
     "name": "brand",
-    "description": "the beer brand"
+    "description": ""
   },
   "options": {
     "timestamps": true
   },
   "attributes": {
     "Name": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "Description": {
-      "default": "",
       "type": "text"
     },
     "Image": {
-      "collection": "file",
+      "model": "file",
       "via": "related",
       "plugin": "upload"
     }
