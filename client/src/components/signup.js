@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
+import {Container, Box, Heading,Card,Image,Text,Icon,TextField} from 'gestalt'
+
 
 class SignUp extends Component {
   render() {
     return (
-      <div>
-         SignOut
-      </div>
+      <Container  > 
+          <Box  justifyContent="center" alignContent="center">
+               SignUp
+          </Box>
+      </Container>
     )
   }
 }

@@ -6,14 +6,14 @@ import {NavLink} from "react-router-dom"
 class Navbar extends Component {
   render() {
     return (
-    <Box
+    <Box 
        height={70}
        color="midnight"
        padding={1}
        shape="roundedBottom"
        display="flex"
-    justifyContent ="around"
-    alignItems="center"
+      justifyContent ="around"
+      alignItems="center"
     >
       { /* The sign up link */}
         <NavLink activeClassName="active" to="/signup"  >
@@ -32,7 +32,7 @@ class Navbar extends Component {
                     />
                         
                 </Box>     
-                <Heading size="xs" color="orange" >
+                <Heading size="xs" color="white" >
                    FreeBeer
                 </Heading>
             </Box>
