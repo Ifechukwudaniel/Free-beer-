@@ -12,4 +12,14 @@ a:visited {
 
 .active {
   font-style: italic;
+  background-color: #0b94f0;
+  color: black !important;
+  border-radius: 0px;
+  padding: 22px;
+  transition: all 300ms ease-in
+}
+.active:hover{
+  background-color: #06619e;
+  padding: 30px;
+  border-radius: 0px;
 }
