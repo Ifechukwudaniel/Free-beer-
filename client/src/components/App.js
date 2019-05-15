@@ -68,7 +68,7 @@ class App extends Component {
             onChange= {this.handleSearch}
            />
            <Box margin ={5} >
-            <Icon accessibilityLabel="Icon "  icon="filter" color={searchBrand ? "orange" : "gray"}/>
+            <Icon accessibilityLabel="Icon "  icon={ searchBrand ?  "filter" : "ellipsis-circle-outline"} color={searchBrand ? "orange" : "gray"}/>
            </Box>
          </Box>
 
