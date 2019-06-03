@@ -37,7 +37,7 @@ class Brews extends React.Component {
       });
       this.setState({
         brews: response.data.brand.brews,
-        brand: response.data.brand.name
+        brand: response.data.brand.Name
       });
     } catch (err) {
       console.error(err);
@@ -87,7 +87,7 @@ class Brews extends React.Component {
         <Box display="flex" direction="column" alignItems="center">
           {/* Brews Heading */}
           <Box margin={2}>
-            <Heading color="orchid">{brand}</Heading>
+            <Heading size="sm" color="orchid">{brand}</Heading>
           </Box>
           {/* Brews */}
           <Box
@@ -147,7 +147,7 @@ class Brews extends React.Component {
              <Mask shape="rounded" wash>
                    <Box  padding={1}  display="flex" direction="column" alignItems ="center">
                        {/* the user cart heading */}
-                      <Heading align ="center" size="md" >  Your Cart </Heading>
+                      <Heading align ="center" size="sm" >  Your Cart </Heading>
                       <Text color= 'gray' italic >
                       {cartItems.length} in your cart
                       </Text>
