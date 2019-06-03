@@ -1,6 +1,8 @@
 import React from "react";
 import Strapi from "strapi-sdk-javascript/build/main";
-import { Box, Heading, Text, Image, Card, Button, Mask } from "gestalt";
+import { Box, Heading, Text,
+  IconButton, Image, Card, Button, Mask } from "gestalt";
+import {Link} from "react-router-dom"
 const apiUrl = process.env.API_URL || "http://localhost:1337";
 const strapi = new Strapi(apiUrl);
 
@@ -42,8 +44,32 @@ class Brews extends React.Component {
     }
   }
 
+  additem = brew =>{ 
+    const alreadyInCart =  this.state.cartItems.findIndex(
+     item => item._id=== brew._id
+  )
+  if( alreadyInCart=== -1){
+   const UpdateItem =   this.state.cartItems.concat({
+       ...brew,
+       quantity : 1
+     })
+    this.setState({cartItems : UpdateItem}) 
+  }
+  else{
+    const UpdateItem = [...this.state.cartItems]
+    UpdateItem[alreadyInCart].quantity++
+    this.setState({cartItems: UpdateItem}) 
+  }
+  }
+  deleteItemFromCart = itemToDeleteId => {
+    const filteredItems = this.state.cartItems.filter(
+      item => item._id !== itemToDeleteId
+    );
+    this.setState({ cartItems: filteredItems });
+  };
+
   render() {
-    const { brand, brews } = this.state;
+    const { brand, brews , cartItems} = this.state;
 
     return (
       <Box
@@ -51,6 +77,11 @@ class Brews extends React.Component {
         display="flex"
         justifyContent="center"
         alignItems="start"
+        dangerouslySetInlineStyle= {{
+          __style:{
+            flexWrap: 'wrap-reverse',
+          }
+        }}
       >
         {/* Brews Section */}
         <Box display="flex" direction="column" alignItems="center">
@@ -101,7 +132,7 @@ class Brews extends React.Component {
                     <Text color="orchid">${brew.Price}</Text>
                     <Box marginTop={2}>
                       <Text bold size="xl">
-                        <Button color="blue" text="Add to Cart" />
+                        <Button onClick={()=>this.additem(brew)} color="blue" text="Add to Cart" />
                       </Text>
                     </Box>
                   </Box>
@@ -109,7 +140,40 @@ class Brews extends React.Component {
               </Box>
             ))}
           </Box>
+          
         </Box>
+         { /* the cart section */}
+          <Box  alignSelf='end' marginTop={2} marginLeft={8} >
+             <Mask shape="rounded" wash>
+                   <Box  padding={1}  display="flex" direction="column" alignItems ="center">
+                       {/* the user cart heading */}
+                      <Heading align ="center" size="md" >  Your Cart </Heading>
+                      <Text color= 'gray' italic >
+                      {cartItems.length} in your cart
+                      </Text>
+                        {/*  cart content  */}
+                        { cartItems.map( item => (
+                            <Box key={item._id}   display="flex" alignItems="center">
+                                <Text>{item.Name} x {item.quantity} - $ { ( item.quantity * item.Price).toFixed(2)} </Text>
+                                <IconButton accessibilityLabel="Delete Icon" icon="cancel" iconColor="red" size="sm" onClick={ ()=> this.deleteItemFromCart(item._id) }/>
+                             </Box>
+                          ))}
+
+                         <Box alignContent ="center" justifyContent="center" direction="column" display="flex">
+                            <Box margin={2}  >
+                               { cartItems.length ===0 &&  (
+                                 <Text color="red"> Please add an item to your cart </Text>
+                               )}
+                            
+                             <Text > Total : $3.99</Text>
+                             <Text>
+                                 <Link to="/checkout"> Checkout </Link>
+                             </Text>
+                            </Box>
+                         </Box>
+                   </Box>
+             </Mask>
+          </Box>
       </Box>
     );
   }
