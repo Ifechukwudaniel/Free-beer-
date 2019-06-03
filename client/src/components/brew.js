@@ -2,6 +2,7 @@ import React from "react";
 import Strapi from "strapi-sdk-javascript/build/main";
 import { Box, Heading, Text,
   IconButton, Image, Card, Button, Mask } from "gestalt";
+import {calculatePrice, setCart, getCart} from '../utils'
 import {Link} from "react-router-dom"
 const apiUrl = process.env.API_URL || "http://localhost:1337";
 const strapi = new Strapi(apiUrl);
@@ -37,7 +38,8 @@ class Brews extends React.Component {
       });
       this.setState({
         brews: response.data.brand.brews,
-        brand: response.data.brand.Name
+        brand: response.data.brand.Name,
+        cartItems : getCart()
       });
     } catch (err) {
       console.error(err);
@@ -53,19 +55,19 @@ class Brews extends React.Component {
        ...brew,
        quantity : 1
      })
-    this.setState({cartItems : UpdateItem}) 
+    this.setState({cartItems : UpdateItem},()=> setCart(this.state.cartItems)) 
   }
   else{
     const UpdateItem = [...this.state.cartItems]
     UpdateItem[alreadyInCart].quantity++
-    this.setState({cartItems: UpdateItem}) 
+    this.setState({cartItems: UpdateItem},()=> setCart(this.state.cartItems)) 
   }
   }
   deleteItemFromCart = itemToDeleteId => {
     const filteredItems = this.state.cartItems.filter(
       item => item._id !== itemToDeleteId
     );
-    this.setState({ cartItems: filteredItems });
+    this.setState({ cartItems: filteredItems },()=> setCart(this.state.cartItems));
   };
 
   render() {
@@ -149,7 +151,7 @@ class Brews extends React.Component {
                        {/* the user cart heading */}
                       <Heading align ="center" size="sm" >  Your Cart </Heading>
                       <Text color= 'gray' italic >
-                      {cartItems.length} in your cart
+                      {cartItems.length} items in your cart
                       </Text>
                         {/*  cart content  */}
                         { cartItems.map( item => (
@@ -165,7 +167,7 @@ class Brews extends React.Component {
                                  <Text color="red"> Please add an item to your cart </Text>
                                )}
                             
-                             <Text > Total : $3.99</Text>
+                             <Text > Total :{calculatePrice(cartItems)}</Text>
                              <Text>
                                  <Link to="/checkout"> Checkout </Link>
                              </Text>
