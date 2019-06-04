@@ -78,7 +78,7 @@ class Signin extends React.Component {
           display="flex"
           justifyContent="center"
         >
-          {/* Sign Up Form */}
+          {/* Sign  in Form */}
           <form
             style={{
               display: "inlineBlock",
@@ -94,10 +94,7 @@ class Signin extends React.Component {
               direction="column"
               alignItems="center"
             >
-              <Heading color="midnight">Let's Get Started</Heading>
-              <Text italic color="orchid">
-                Sign up to order some brews!
-              </Text>
+              <Heading size="sm" color="midnight">Welcome Back , Let get you some boze</Heading>
             </Box>
             {/* Username Input */}
             <Box>
