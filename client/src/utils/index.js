@@ -9,6 +9,11 @@ export const calculatePrice = items => {
       .reduce((acc, item) => acc + item.quantity * item.Price, 0)
       .toFixed(2)}`;
   };
+export const calculateAmount = items => {
+    return  Number(items
+      .reduce((acc, item) => acc + item.quantity * item.Price, 0)
+      .toFixed(2))
+  };
 
 export const setCart =(cart)=>{
     (localStorage) ? localStorage.setItem(Cart_key, JSON.stringify(cart)): []
