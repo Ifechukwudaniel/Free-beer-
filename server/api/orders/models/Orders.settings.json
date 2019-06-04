@@ -1,0 +1,28 @@
+{
+  "connection": "default",
+  "collectionName": "ordersfinshed",
+  "info": {
+    "name": "orders",
+    "description": ""
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "address": {
+      "type": "string"
+    },
+    "postalCode": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "brews": {
+      "type": "json"
+    },
+    "amount": {
+      "type": "decimal"
+    }
+  }
+}

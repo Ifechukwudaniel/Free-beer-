@@ -2,48 +2,48 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/brands",
-      "handler": "Brand.find",
+      "path": "/orders",
+      "handler": "Orders.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/brands/count",
-      "handler": "Brand.count",
+      "path": "/orders/count",
+      "handler": "Orders.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/brands/:_id",
-      "handler": "Brand.findOne",
+      "path": "/orders/:_id",
+      "handler": "Orders.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/brands",
-      "handler": "Brand.create",
+      "path": "/orders",
+      "handler": "Orders.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/brands/:_id",
-      "handler": "Brand.update",
+      "path": "/orders/:_id",
+      "handler": "Orders.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/brands/:_id",
-      "handler": "Brand.destroy",
+      "path": "/orders/:_id",
+      "handler": "Orders.destroy",
       "config": {
         "policies": []
       }

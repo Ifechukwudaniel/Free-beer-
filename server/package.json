@@ -21,8 +21,10 @@
   "dependencies": {
     "lodash": "^4.17.5",
     "strapi": "3.0.0-alpha.26.2",
+    "strapi-hook-mongoose": "3.0.0-alpha.26.2",
+    "strapi-provider-email-sendgrid": "^3.0.0-alpha.26.2",
     "strapi-utils": "3.0.0-alpha.26.2",
-    "strapi-hook-mongoose": "3.0.0-alpha.26.2"
+    "stripe": "^7.1.0"
   },
   "author": {
     "name": "daniel",
