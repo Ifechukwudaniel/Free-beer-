@@ -34,11 +34,11 @@ class App extends Component {
           }`
         }
       })
-    // console.log(data)
-     this.setState({brands : data.brands, loading:false})
+      //console.log(response)
+   this.setState({brands : data.brands, loading:false})
     
     } catch (error) {
-       console.log(" add error occured")
+       console.log(error)
        this.setState({loading:false})
     }   
   }
