@@ -43,9 +43,11 @@ const AuthNavbar = ({handleSignOut })=> (
                   />
                       
               </Box>     
-              <Heading size="xs" color="white" >
-                 FreeBeer
-              </Heading>
+              <div className="main-title">
+                  <Heading size="xs" color="white" >
+                    FreeBeer
+                  </Heading>
+                </div>
           </Box>
       </NavLink>        
       
@@ -81,9 +83,11 @@ const UnAuthNavbar = ()=> (
                     />
                         
                 </Box>     
-                <Heading size="xs" color="white" >
-                   FreeBeer
-                </Heading>
+                <div className="main-title">
+                  <Heading size="xs" color="white" >
+                    FreeBeer
+                  </Heading>
+                </div>
             </Box>
         </NavLink>        
         

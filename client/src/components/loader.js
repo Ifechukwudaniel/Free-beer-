@@ -1,5 +1,5 @@
 import React from 'react'
-import { ClimbingBoxLoader} from 'react-spinners'
+import { HashLoader} from 'react-spinners'
 import {Box} from "gestalt"
 
 
@@ -15,7 +15,7 @@ const Loader =({show}) => {
       }
     }}
     >
-        <ClimbingBoxLoader  color="#66440E" size={50} margin={10}/>
+        <HashLoader color="#9DC2EE" size={150} margin={10}/>
    </Box>   )
   )
 }
