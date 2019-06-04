@@ -1,6 +1,10 @@
 import React from "react";
 import { Container, Box, Button, Heading, Text, TextField } from "gestalt";
 import ToastMessage from './toastMessage'
+import {setToken} from "../utils"
+import  Stripi  from "strapi-sdk-javascript/build/main"
+const Api_Url = process.env.API_URL || 'http://localhost:1337/'
+const strapi = new Stripi(Api_Url)
 
 class Signup extends React.Component {
   state = {
@@ -8,7 +12,8 @@ class Signup extends React.Component {
     email: "",
     password: "",
     toast : false,
-    toastMessage: ""
+    toastMessage: "",
+    loading:false
   };
 
   handleChange = ({ event, value }) => {
@@ -16,24 +21,50 @@ class Signup extends React.Component {
     this.setState({ [event.target.name]: value });
   };
 
-  handleSubmit = event  =>{
+   handleSubmit = async event  =>{
      event.preventDefault()
+     const { username, email,password } = this.state
       if (this.isFormEmpty(this.state)) {
        this.showToast("Fill all  the fields")
       }
+
+
+      try {
+        // change loading state 
+         this.setState({ loading: true})
+         // send register the user
+        const response =  await strapi.register( username, email, password)
+        //change loading  state
+        this.setState({ loading:  false})
+        // redirect the user 
+         this.redirect('/')
+
+        setToken(response.jwt)
+
+      } catch (error) {
+        //change loding state
+        this.setState({ loading:  false})
+        //show error as toast
+        this.showToast(error.message)
+        
+      }
+  
   }
 
   isFormEmpty =({username, email, password} )=>{
      return !username || !email || !password
   }
-  
+
   showToast= toastmsg =>{
     this.setState({ toast : true,})
     this.setState({ toastMessage : toastmsg})
     setTimeout(()=> {this.setState({ toast : false,toastMessage : ""}) }, 5000)
   }
+
+  redirect =(link) => this.props.history.push(link)
+
   render() {
-    const {toast , toastMessage} = this.state
+    const {toast , toastMessage, loading} = this.state
     return (
       <Container>
         <Box
@@ -100,7 +131,7 @@ class Signup extends React.Component {
             />
             </Box>
             <Box marginTop={4}>
-               <Button inline color="blue" text="Submit" type="submit" />
+               <Button disabled={loading} inline color="blue" text="Submit" type="submit" />
             </Box>
           </form>
         </Box>
